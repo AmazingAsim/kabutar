@@ -26,7 +26,7 @@ io.on('connection',(socket)=>{
             sender:msg.name
            }
        
-         socket.emit('server',msg)
+         io.emit('server',msg)
         model.insertMany([message])
      }))
 })
