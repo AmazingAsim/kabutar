@@ -28,8 +28,11 @@
           
             padding: 10px;
             background-color: rgb(241, 222, 222);
-            border: 2px solid green;
-            box-shadow: 0px 0px 2px gray;
+            
+            box-shadow: 0px 0px 10px rgb(39, 38, 38);
+            border-radius: 10px;
+
+
         }
 
         
@@ -71,7 +74,14 @@
 
         }
 
-
+        input{
+            padding: 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.2rem;
+            margin: 5px;
+        }
+      
 
 
 
@@ -101,7 +111,7 @@
         let socket = io()
         let username = prompt('please enter your name');
 
-        fetch('http://localhost:2000/messages').then(r => { return r.json() }).then(r => {
+        fetch('https://whitekabutar.herokuapp.com/messages').then(r => { return r.json() }).then(r => {
             for (let x of r) {
                 let dt = document.createElement('h3')
                 let dd = document.createElement('strong')
