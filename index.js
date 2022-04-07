@@ -7,7 +7,7 @@ let io=require('socket.io')(httpserver)
 let model=require('./model/messagemodel');
 db.dbconnection();
 
-app.get('/',(req,res)=>{
+app.get('/chat',(req,res)=>{
     res.sendFile(__dirname+'/index.html')
 })
 
