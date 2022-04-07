@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+   
+        .feed{
+            width: 500px;
+            margin-left:50px;
+            margin-top: 20px;
+            padding: 30px;
+            background-color: honeydew;
+            box-shadow: 0px 0px 5px gray;
+            border-radius: 20px;
+            font-style: bold;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+
+
+        }
+
+        button{
+          
+            padding: 10px;
+            background-color: rgb(241, 222, 222);
+            border: 2px solid green;
+            box-shadow: 0px 0px 2px gray;
+        }
+
+        
+        #msgbox > li:nth-child(odd)  {
+             background: #f56868;
+             min-width: 100px;
+             max-width: 150px;
+             padding: 10px;
+             margin: 10px;
+             margin-left: auto;
+             border-radius: 30px;
+             border-bottom-right-radius:10px ;
+
+             }
+
+            li{
+                list-style-type:none;
+
+            }
+
+        #msgbox > li:nth-child(even) { 
+            background: #82e9e0;
+            width: fit-content;
+            padding: 10px;
+            border-radius: 30px;
+            border-bottom-left-radius:10px ;
+
+            min-width: 100px;
+            max-width: 150px;
+            padding: 10px;
+            margin: 10px;
+
+         }
+
+        dd{
+            
+         padding: 10px;
+         margin:10px
+
+        }
+
+
+
+
+
+    </style>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+
+    <div class="feed">
+        <h1><I>PIGIONS ARE READY</I></h1>
+        <ul id="msgbox">
+
+        </ul>
+        <input type="text" id="messageinput">
+        <button type="button" onclick="send()">submit</button>
+    </div>
+   
+
+
+
+
+    <script>
+        let socket = io()
+        let username = prompt('please enter your name');
+
+        fetch('http://localhost:2000/messages').then(r => { return r.json() }).then(r => {
+            for (let x of r) {
+                let dt = document.createElement('h3')
+                let dd = document.createElement('strong')
+                dt.textContent = x.sender+" "+x.time
+                dd.textContent = x.message
+
+                let listitem=document.createElement('li');
+
+                listitem.appendChild(dt);
+                listitem.appendChild(dd);
+
+                document.getElementById('msgbox').appendChild(listitem)
+               
+
+               
+            }
+        })
+
+
+
+
+
+        socket.on('server', (msg) => {
+            let dt = document.createElement('h3')
+            let dd = document.createElement('strong')
+            dt.textContent = msg.name
+            dd.textContent = msg.message
+      
+            let listitem=document.createElement('li');
+
+            listitem.appendChild(dt);
+            listitem.appendChild(dd);
+
+            document.getElementById('msgbox').appendChild(listitem)
+            window.scrollTo(0, document.body.scrollHeight);
+
+
+           
+           
+
+        })
+
+        function send() {
+            let message = document.getElementById('messageinput').value;
+            socket.emit('client', { name: username, message: message, time:new Date().toLocaleTimeString})
+        }
+    </script>
+</body>
+
+</html>
