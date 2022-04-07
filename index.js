@@ -1,6 +1,6 @@
 let express=require('express')
 let app=express()
-let port= process.env.PORT || 2000
+let port=( process.env.PORT || 2000)
 let db=require('./config/config')
 let httpserver=require('http').createServer(app)
 let io=require('socket.io')(httpserver)
