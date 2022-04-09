@@ -10,87 +10,147 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
-       
 
-        button {
-
-            padding: 10px;
-            background-color: rgb(255, 255, 255);
-
-            box-shadow: 0px 0px 10px rgb(39, 38, 38);
-            border-radius: 10px;
-            border: 2px solid black;
-            display: inline;
-
-
+        li{
+            list-style-type:none;
         }
-        button:hover{
-            background-color: blue;
-            border: none;
-            padding: 12px;
+        @media only screen and (min-width:600px) {
+            .heading{
+                text-align: left;
+                position:fixed;
+                width: 100%;
+            }
+
+            #msgbox>li:nth-child(odd) {
+                background: #f56868;
+                width: 80%;
+                padding: 10px;
+                margin: 10px;
+                margin-left: auto;
+                border-radius: 20px;
+                border-top-left-radius: 5px;
+                border-bottom-right-radius: 10px;
+               }
+
+
+
+            #msgbox>li:nth-child(even) {
+                background: #82e9e0;
+                width: 80%;
+                height: fit-content;
+                padding: 10px;
+                border-radius: 30px;
+                border-bottom-left-radius: 10px;
+                border-top-right-radius: 5px;
+                padding: 10px;
+                margin: 2px;
+                margin-left: -30px;
+              
+
+            }
+            .feedbox{
+                display: flex;
+                justify-content: center;
+            }
+
+            .feed{
+                width: 80%;
+                height: 80vh;
+              margin-left: auto;
+                text-align: center;
+               
+                padding-top: 25px;
+                margin-top: 30px;
+                margin-left: 40px;
+               
+
+            }
+
+           #inputbox{
+           
+          display: flex;
+          justify-content: space-between;
+          width: 80%;
+           margin-left: auto;
+          text-align: center;
+          background-color: rgb(255, 255, 255);
+          padding:10px;
+           }
+
+           input{
+               width: 80%;
+               padding: 10px;
+
+           }
+           h5,strong{
+               line-height: 3px;
+           }
+           h5{
+               text-align: left;
+               padding: 20px;
+               background-color: rgb(25, 0, 255);
+               width: fit-content;
+               border: 2px solid black;
+               border-radius: 10px;
+           }
+           h6{
+               text-align: left;
+           
+
+
+               padding: auto;
+               
+           }
+          
+           
         }
 
+        @media only screen and (max-width:600px) {
 
-        #msgbox>li:nth-child(odd) {
-            background: #f56868;
-            min-width: 100px;
-            max-width: 150px;
-            padding: 10px;
-            margin: 10px;
-            margin-left: auto;
-            border-radius: 30px;
-            border-bottom-right-radius: 10px;
 
-        }
+            #msgbox>li:nth-child(odd) {
+                background: #e2e2e2;
+                box-shadow: 0px 0px 10px rgb(63, 63, 63);
+                width: 80%;
+                padding: 10px;
+                margin: 10px;
+                margin-left: auto;
+                border-radius: 20px;
+                border-top-left-radius: 5px;
+                line-height: 2px;
+                border-bottom-right-radius: 10px;
+               
 
-        li {
-            list-style-type: none;
+            }
 
-        }
 
-        #msgbox>li:nth-child(even) {
-            background: #82e9e0;
-            width: fit-content;
-            padding: 10px;
-            border-radius: 30px;
-            border-bottom-left-radius: 10px;
 
-            min-width: 100px;
-            max-width: 150px;
-            padding: 10px;
-            margin: 10px;
+            #msgbox>li:nth-child(even) {
+                background: #e2e2e2;
+                box-shadow: 0px 0px 10px rgb(63, 63, 63);
+                width: 80%;
+                height: fit-content;
+                padding: 10px;
+                border-radius: 30px;
+                border-bottom-left-radius: 10px;
+                border-top-right-radius: 5px;
+                padding: 10px;
+                margin: 2px;
+                margin-left: -30px;
+                line-height: 2px;
+               }
 
-        }
-
-        
-
-        input {
-            padding: 20px;
-            border-radius: 10px;
-            border: none;
-            font-size: 1.2rem;
-            margin: 5px;
-            box-shadow: 0px 0px 8px black;
-            width: 80%;
-        }
-        .in{
-           border-radius: 20px;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-        }
-
-        .main{
-            height: 100vh;
-        }
-
-        .feed{
-            overflow: scroll;
-            
-        }
-
-        
-        
+               input{
+                   width: 80%;
+                   padding: 5px;
+               }
+               button{
+                   width: 15%;
+               }
+               #inputbox{
+                   display: flex;
+               }
+            }
     </style>
 
 
@@ -99,44 +159,44 @@
 </head>
 
 <body>
-
+    <h2 class="heading bg-warning ">kabooter</h2>
     <div class="container-fluid">
-        
         <div class="row main">
-            <div class="col-12 col-sm-8 justify-content-center bg-secondary">
+            <div class="col-12 col-sm-12  feedbox ">
                 <div class="feed">
-                    <h1 class="text-center"><I>PIGIONS ARE READY</I></h1>
                     <ul id="msgbox">
-            
                     </ul>
-                   
                 </div>
             </div>
-            <div class="col justify-content-center bg-warning in">
-                <input type="text" class="form-control" id="messageinput">
-                <button type="button" onclick="send()" class="btn">submit</button>
-            </div>
-        
-          
         </div>
+        
     </div>
 
-
-
     
+   
+    <div id="inputbox" class="fixed-bottom bg-warning p-2 m-1" >
+        <input type="text" id="messageinput" class="form-control" onkeyup="handle(event)">
+        <button class="btn btn-outline-success m-2" type="reset" onclick="send()">send</button>
+   </div>
+ 
+
+
+
+
 
 
 
 
 
     <script>
+        window.scrollTo(0, document.body.scrollHeight);
         let socket = io()
         let username = prompt('please enter your name');
 
-        fetch('https://whitekabutar.herokuapp.com/messages').then(r => { return r.json() }).then(r => {
+        fetch("https://whitekabutar.herokuapp.com/messages").then(r => { return r.json() }).then(r => {
             for (let x of r) {
-                let dt = document.createElement('h3')
-                let dd = document.createElement('strong')
+                let dt = document.createElement('h5')
+                let dd = document.createElement('h6')
                 dt.textContent = x.sender + " " + x.time
                 dd.textContent = x.message
 
@@ -156,9 +216,11 @@
 
 
 
+
+
         socket.on('server', (msg) => {
-            let dt = document.createElement('h3')
-            let dd = document.createElement('strong')
+            let dt = document.createElement('h5')
+            let dd = document.createElement('h6')
             dt.textContent = msg.name
             dd.textContent = msg.message
 
@@ -180,6 +242,17 @@
             let message = document.getElementById('messageinput').value;
             socket.emit('client', { name: username, message: message, time: new Date().toLocaleTimeString })
         }
+
+        function handle(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); // Ensure it is only this code that runs
+                    send()
+               
+        }
+    }
+
+
+        
     </script>
 </body>
 
