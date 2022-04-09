@@ -19,24 +19,32 @@
                 text-align: left;
                 position:fixed;
                 width: 100%;
+                z-index: 2;
+            }
+
+            #msgbox>li{
+                display: flex;
             }
 
             #msgbox>li:nth-child(odd) {
-                background: #f56868;
-                width: 80%;
+                 background-color: #e2e2e2;
+                box-shadow: 0px 0px 10px rgb(63, 63, 63);
+                width: 50%;
                 padding: 10px;
                 margin: 10px;
                 margin-left: auto;
                 border-radius: 20px;
                 border-top-left-radius: 5px;
                 border-bottom-right-radius: 10px;
+                line-height: 2px;
                }
 
 
 
             #msgbox>li:nth-child(even) {
-                background: #82e9e0;
-                width: 80%;
+              background-color: #e2e2e2;
+              box-shadow: 0px 0px 10px rgb(63, 63, 63);
+                width: 50%;
                 height: fit-content;
                 padding: 10px;
                 border-radius: 30px;
@@ -45,12 +53,14 @@
                 padding: 10px;
                 margin: 2px;
                 margin-left: -30px;
+                line-height: 2px;
               
 
             }
             .feedbox{
                 display: flex;
                 justify-content: center;
+                z-index: 1;
             }
 
             .feed{
@@ -83,18 +93,23 @@
 
            }
            h5,strong{
-               line-height: 3px;
+               line-height: 2px;
            }
            h5{
                text-align: left;
-               padding: 20px;
-               background-color: rgb(25, 0, 255);
+               padding-top: 10px;
+             
                width: fit-content;
-               border: 2px solid black;
+              text-shadow: 0px 0px 3px black;
                border-radius: 10px;
            }
+
+           h5::after{
+               content: "|";
+           }
            h6{
-               text-align: left;
+               text-align: right;
+               color:yellow;
            
 
 
@@ -149,6 +164,10 @@
                }
                #inputbox{
                    display: flex;
+               }
+
+               h6{
+                   color:yellow;
                }
             }
     </style>
