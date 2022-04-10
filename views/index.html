@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  
+
+
+   
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <h2 class="heading bg-warning ">kabooter</h2>
+    <div class="container-fluid">
+        <div class="row main">
+            <div class="col-12 col-sm-12  feedbox ">
+                <div class="feed">
+                    <ul id="msgbox">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+   
+    <div id="inputbox" class="fixed-bottom bg-warning p-2 m-1" >
+        <input type="text" id="messageinput" class="form-control" onkeyup="handle(event)">
+        <button class="btn btn-outline-success m-2" type="reset" onclick="send()">send</button>
+   </div>
+ <script src="script.js"></script>
+</body>
+
+</html>

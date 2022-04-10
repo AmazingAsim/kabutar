@@ -1,5 +1,13 @@
 let express=require('express')
 let app=express()
+let router=require('./router/route')
+let cors=require('cors');
+app.use(cors({
+   origin:'*',
+   methods:["GET",'DELETE']
+}))
+app.use(express.static("views"));
+// app.set('view engine','ejs')
 let port=( process.env.PORT || 2000)
 let db=require('./config/config')
 let httpserver=require('http').createServer(app)
@@ -7,14 +15,12 @@ let io=require('socket.io')(httpserver)
 let model=require('./model/messagemodel');
 db.dbconnection();
 
-app.get('/chat',(req,res)=>{
-    res.sendFile(__dirname+'/index.html')
-})
+// app.get('/chat',(req,res)=>{
+//     res.render('index')
+// })
 
-app.get('/messages',async (req,res)=>{
-  let data= await model.find()
-  res.send(data);
-})
+app.use('/',router)
+
 
 io.on('connection',(socket)=>{
      console.log('client is connected');
@@ -26,7 +32,7 @@ io.on('connection',(socket)=>{
             sender:msg.name
            }
        
-         io.emit('server',msg)
+         io.emit('server',message)
         model.insertMany([message])
      }))
 })

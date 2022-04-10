@@ -1,0 +1,205 @@
+
+
+li{
+    list-style-type:none;
+}
+
+
+@media only screen and (min-width:600px) {
+
+    body{
+        background-image: url('https://cdn4.vectorstock.com/i/1000x1000/12/43/sketch-of-the-flying-pigeon-vector-22331243.jpg');
+        background-size: cover;
+       background-position-y: center;
+       background-attachment: fixed;
+       
+       
+    }
+    .heading{
+
+        text-align: left;
+        position:fixed;
+        width: 100%;
+        z-index: 2;
+    }
+
+    #msgbox>li{
+        display: flex;
+    }
+
+    #msgbox>li:nth-child(odd) {
+         background-color: #e2e2e2;
+        box-shadow: 0px 0px 10px rgb(63, 63, 63);
+        width: 50%;
+        padding: 10px;
+        margin: 10px;
+        margin-left: auto;
+        border-radius: 20px;
+        border-top-left-radius: 5px;
+        border-bottom-right-radius: 10px;
+        line-height: 2px;
+       }
+
+
+
+    #msgbox>li:nth-child(even) {
+      background-color: #e2e2e2;
+      box-shadow: 0px 0px 10px rgb(63, 63, 63);
+        width: 50%;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 30px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 5px;
+        padding: 10px;
+        margin: 2px;
+        margin-left: -30px;
+        line-height: 2px;
+      
+
+    }
+    .feedbox{
+        display: flex;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .feed{
+        width: 80%;
+        height: 80vh;
+      margin-left: auto;
+        text-align: center;
+       
+        padding-top: 25px;
+        margin-top: 30px;
+        margin-left: 40px;
+       
+
+    }
+
+   #inputbox{
+   
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+   margin-left: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  padding:10px;
+   }
+
+   input{
+       width: 80%;
+       padding: 10px;
+
+   }
+   h5,strong{
+       line-height: 2px;
+   }
+   h5{
+       text-align: left;
+       padding-top: 10px;
+     
+       width: fit-content;
+      text-shadow: 0px 0px 3px black;
+       border-radius: 10px;
+   }
+
+   h5::after{
+       content: "|";
+   }
+   h6{
+       text-align: right;
+       color:yellow;
+       text-shadow: 0px 0px 4px black;
+       margin-left: 10px;
+   
+
+
+      
+       
+   }
+  
+   
+}
+
+@media only screen and (max-width:600px) {
+
+    .feedbox{
+        margin-bottom: 100px;
+        margin-top: 100px;
+    }
+
+    body{
+        width:fit-content;
+        max-width: 600px;
+        background-image: url('https://cdn.create.vista.com/api/media/medium/22327187/stock-vector-cartoon-postman-pigeon-vector-illustration?token=');
+        
+        background-repeat: no-repeat;
+        background-position-x: center;
+       
+        background-attachment: fixed;
+       
+       
+    }
+
+    .heading{
+        width: 100%;
+        position: fixed;
+        
+    }
+
+    #msgbox>li:nth-child(odd) {
+        background: #e2e2e2;
+        box-shadow: 0px 0px 10px rgb(63, 63, 63);
+        width: 80%;
+        padding: 10px;
+        margin: 10px;
+        margin-left: auto;
+        border-radius: 20px;
+        border-top-left-radius: 5px;
+        line-height: 2px;
+        border-bottom-right-radius: 10px;
+        text-overflow:clip;
+        overflow: hidden;
+       
+
+    }
+
+
+
+    #msgbox>li:nth-child(even) {
+        background: #e2e2e2;
+        box-shadow: 0px 0px 10px rgb(63, 63, 63);
+        width: 80%;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 30px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 5px;
+        padding: 10px;
+        margin: 2px;
+        margin-left: -30px;
+        line-height: 2px;
+        text-overflow:clip;
+        overflow: hidden;
+       }
+
+       input{
+           width: 80%;
+           padding: 5px;
+       }
+       button{
+           width: 15%;
+       }
+       #inputbox{
+           display: flex;
+       }
+
+       h6{
+        text-align: right;
+        color:rgb(27, 27, 0);
+        text-shadow: 0px 0px 4px black;
+        margin-left: 10px;
+       }
+    }
