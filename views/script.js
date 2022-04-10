@@ -1,3 +1,5 @@
+const { localsName } = require("ejs");
+
 // https://whitekabutar.herokuapp.com/messages
 let onlineurl="https://whitekabutar.herokuapp.com";
 let localurl="http://localhost:2000"
@@ -64,7 +66,7 @@ socket.on('server', (msg) => {
     let dd = document.createElement('h6')
  
 
-    dbutton.innerText="&times;"
+   
     dt.textContent = msg.sender+""+msg.time;
     dd.textContent = msg.message
 
@@ -86,7 +88,7 @@ socket.on('server', (msg) => {
 
 function send() {
     let message = document.getElementById('messageinput').value;
-    socket.emit('client', { name: username, message: message, time: new Date().toLocaleTimeString })
+    socket.emit('client', { name: localStorage.getItem('user'), message: message, time: new Date().toLocaleTimeString })
 }
 
 function handle(e){
