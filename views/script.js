@@ -1,19 +1,21 @@
-
+// https://whitekabutar.herokuapp.com/messages
 window.scrollTo(0, document.body.scrollHeight);
 let socket = io()
 let username = prompt('please enter your name');
 
-fetch("https://whitekabutar.herokuapp.com/messages").then(r => { return r.json() }).then(r => {
+fetch("http://localhost:2000/messages").then(r => { return r.json() }).then(r => {
     for (let x of r) {
         let dt = document.createElement('h5')
         let dd = document.createElement('h6')
         let dbutton=document.createElement('button');
+        dbutton.innerText=`delete`
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
-            fetch('https://whitekabutar.herokuapp.com/delete/'+x.time,{method:'Delete'}).then(()=>{
-                dbutton.parentElement.remove()
-          
-             })
+
+            fetch('http://localhost:2000/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
+                alert('delete successfull')
+            }).catch(err=>{alert(err)});
+               dbutton.parentElement.remove()
         })
         dt.textContent = x.sender + " " + x.time
         dd.textContent = x.message
@@ -44,12 +46,7 @@ fetch("https://whitekabutar.herokuapp.com/messages").then(r => { return r.json()
 socket.on('server', (msg) => {
     let dt = document.createElement('h5')
     let dd = document.createElement('h6')
-    let dbutton=document.createElement('button');
-    dbutton.addEventListener('click',()=>{
-        fetch('https://whitekabutar.herokuapp.com/delete/'+msg.time,{method:'Delete'}).then(()=>{
-            dbutton.parentElement.remove()
-        })
-    })
+ 
 
     dbutton.innerText="&times;"
     dt.textContent = msg.sender+""+msg.time;
@@ -59,7 +56,7 @@ socket.on('server', (msg) => {
 
     listitem.appendChild(dt);
     listitem.appendChild(dd);
-    listitem.appendChild(dbutton)
+
 
 
     document.getElementById('msgbox').appendChild(listitem)

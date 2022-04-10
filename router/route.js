@@ -7,11 +7,15 @@ router.get('/messages',async (req,res)=>{
     res.send(data);
   })
 
-  router.delete('delete/:time',async (req,res)=>{
-      let time=req.params.time
+  router.delete('/delete/:_id',async (req,res)=>{
+      let id=req.params._id
+
+      console.log(id)
+      console.log(typeof(id))
          try{
-                let data=await model.deleteOne({time:time})
-                res.send(data)
+                let data=await model.deleteOne({_id:id})
+                console.log(data)
+                res.send(data.acknowledged)
 
          }catch(err){
              res.send(err)
