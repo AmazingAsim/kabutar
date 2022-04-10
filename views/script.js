@@ -8,7 +8,12 @@ let socket = io()
 let user=localStorage.getItem('user');
 if(user==null){
     let username=prompt('please enter your name');
+if(username==null || username==undefined){
+    username=prompt('please enter your name');
+}else{
+    
     localStorage.setItem('user',username);
+}
 
    
 }
