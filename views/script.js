@@ -1,9 +1,23 @@
 // https://whitekabutar.herokuapp.com/messages
-window.scrollTo(0, document.body.scrollHeight);
-let socket = io()
-let username = prompt('please enter your name');
+let onlineurl="https://whitekabutar.herokuapp.com";
+let localurl="http://localhost:2000"
 
-fetch("http://localhost:2000/messages").then(r => { return r.json() }).then(r => {
+let socket = io()
+let user=localStorage.getItem('user');
+if(user==null){
+    let username=prompt('please enter your name');
+    localStorage.setItem('user',username);
+
+   
+}
+else{
+    alert('welcome '+user)
+   
+    
+}
+
+
+fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
     for (let x of r) {
         let dt = document.createElement('h5')
         let dd = document.createElement('h6')
@@ -12,7 +26,7 @@ fetch("http://localhost:2000/messages").then(r => { return r.json() }).then(r =>
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
 
-            fetch('http://localhost:2000/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
+            fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
                 alert('delete successfull')
             }).catch(err=>{alert(err)});
                dbutton.parentElement.remove()
@@ -33,6 +47,8 @@ fetch("http://localhost:2000/messages").then(r => { return r.json() }).then(r =>
 
 
     }
+
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 )
@@ -60,7 +76,7 @@ socket.on('server', (msg) => {
 
 
     document.getElementById('msgbox').appendChild(listitem)
-    window.scrollTo(0, document.body.scrollHeight);
+    
 
 
 
