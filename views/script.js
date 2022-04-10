@@ -8,14 +8,7 @@ let socket = io()
 let user=localStorage.getItem('user');
 if(user==null){
     let username=prompt('please enter your name');
-if(username==null || username==undefined){
-    username=prompt('please enter your name');
-}else{
-    
-    localStorage.setItem('user',username);
-}
-
-   
+    localStorage.setItem('user',username); 
 }
 else{
     alert('welcome '+user)
@@ -93,7 +86,7 @@ socket.on('server', (msg) => {
 
 function send() {
     let message = document.getElementById('messageinput').value;
-    socket.emit('client', { name: localStorage.getItem('user'), message: message, time: new Date().toLocaleTimeString })
+    socket.emit('client', { name: localStorage.getItem('user'), message: message, time: new Date().toLocaleDateString })
 }
 
 function handle(e){
