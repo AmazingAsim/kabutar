@@ -10,7 +10,7 @@ fetch("https://whitekabutar.herokuapp.com/messages").then(r => { return r.json()
         let dbutton=document.createElement('button');
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
-            fetch('https://whitekabutar.herokuapp.com/delete/'+x._id,{method:'Delete'}).then(()=>{
+            fetch('https://whitekabutar.herokuapp.com/delete/'+x.time,{method:'Delete'}).then(()=>{
                 dbutton.parentElement.remove()
           
              })
