@@ -1,4 +1,4 @@
-const { localsName } = require("ejs");
+
 
 // https://whitekabutar.herokuapp.com/messages
 let onlineurl="https://whitekabutar.herokuapp.com";
