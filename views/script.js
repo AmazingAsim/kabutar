@@ -91,14 +91,17 @@ function send() {
     if(username==null || username=="null" || username==''){
         username=prompt('please enter your name');
         localStorage.setItem('user',username);
+      
+    }else{
+        let message = document.getElementById('messageinput').value;
+        document.getElementById('messageinput').value=''
+        let time=new Date()
+        let currentdate=time.toLocaleDateString();
+        let currnettime=time.toLocaleTimeString();
+     
+        socket.emit('client', { name: username, message: message, time:currentdate+' '+currnettime})
     }
-    let message = document.getElementById('messageinput').value;
-    document.getElementById('messageinput').value=''
-    let time=new Date()
-    let currentdate=time.toLocaleDateString();
-    let currnettime=time.toLocaleTimeString();
-    alert(currentdate+' '+currnettime)
-    socket.emit('client', { name: username, message: message, time:currentdate+' '+currnettime})
+    
 }
 
 function handle(e){
