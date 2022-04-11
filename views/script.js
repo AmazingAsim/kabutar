@@ -18,7 +18,7 @@ else{
 }
 
 
-fetch(localurl+'/messages').then(r => { return r.json() }).then(r => {
+fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
     for (let x of r) {
         let dt = document.createElement('b')
         let dd = document.createElement('h6')
@@ -27,7 +27,7 @@ fetch(localurl+'/messages').then(r => { return r.json() }).then(r => {
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
 
-            fetch(localurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
+            fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
                 alert('delete successfull')
             }).catch(err=>{alert(err)});
                dbutton.parentElement.remove()
