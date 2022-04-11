@@ -28,7 +28,7 @@ io.on('connection',(socket)=>{
 
         message={
             message:msg.message,
-            time:new Date().toLocaleTimeString(),
+            time:msg.time,
             sender:msg.name
            }
        

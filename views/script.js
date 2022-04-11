@@ -6,8 +6,9 @@ let localurl="http://localhost:2000"
 
 let socket = io()
 let user=localStorage.getItem('user');
-if(user==null){
-    let username=prompt('please enter your name');
+
+if(user==null || user=='null' || user==undefined || user==''){
+    var username=prompt('please enter your name');
     localStorage.setItem('user',username); 
 }
 else{
@@ -17,21 +18,21 @@ else{
 }
 
 
-fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
+fetch(localurl+'/messages').then(r => { return r.json() }).then(r => {
     for (let x of r) {
-        let dt = document.createElement('h5')
+        let dt = document.createElement('b')
         let dd = document.createElement('h6')
         let dbutton=document.createElement('button');
         dbutton.innerText=`delete`
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
 
-            fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
+            fetch(localurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
                 alert('delete successfull')
             }).catch(err=>{alert(err)});
                dbutton.parentElement.remove()
         })
-        dt.textContent = x.sender + " " + x.time
+        dt.textContent ='from '+ x.sender + " at " + x.time
         dd.textContent = x.message
 
        
@@ -60,12 +61,12 @@ fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
 
 
 socket.on('server', (msg) => {
-    let dt = document.createElement('h5')
+    let dt = document.createElement('b');
     let dd = document.createElement('h6')
  
 
    
-    dt.textContent = msg.sender+""+msg.time;
+    dt.textContent =' from '+ msg.sender+" at "+ msg.time;
     dd.textContent = msg.message
 
     let listitem = document.createElement('li');
@@ -85,14 +86,26 @@ socket.on('server', (msg) => {
 })
 
 function send() {
+    let username=localStorage.getItem('user');
+
+    if(username==null || username=="null" || username==''){
+        username=prompt('please enter your name');
+        localStorage.setItem('user',username);
+    }
     let message = document.getElementById('messageinput').value;
-    socket.emit('client', { name: localStorage.getItem('user'), message: message, time: new Date().toLocaleDateString })
+    document.getElementById('messageinput').value=''
+    let time=new Date()
+    let currentdate=time.toLocaleDateString();
+    let currnettime=time.toLocaleTimeString();
+    alert(currentdate+' '+currnettime)
+    socket.emit('client', { name: username, message: message, time:currentdate+' '+currnettime})
 }
 
 function handle(e){
     if(e.keyCode === 13){
         e.preventDefault(); // Ensure it is only this code that runs
             send()
+           
        
 }
 }
