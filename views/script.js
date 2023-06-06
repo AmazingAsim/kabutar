@@ -1,7 +1,6 @@
 
 
-// https://whitekabutar.herokuapp.com/messages
-let onlineurl="https://whitekabutar.herokuapp.com";
+let onlineurl=`https://${location.host}`;
 let localurl="http://localhost:2000"
 
 let socket = io()
@@ -13,10 +12,7 @@ if(user==null || user=='null' || user==undefined || user==''){
 }
 else{
     alert('welcome '+user)
-   
-    
 }
-
 
 fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
     for (let x of r) {
@@ -35,17 +31,11 @@ fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
         dt.textContent ='from '+ x.sender + " at " + x.time
         dd.textContent = x.message
 
-       
-
-
-
         listitem.appendChild(dt);
         listitem.appendChild(dd);
         listitem.appendChild(dbutton);
 
         document.getElementById('msgbox').appendChild(listitem)
-
-
 
     }
 
@@ -53,11 +43,6 @@ fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
 }
 
 )
-
-
-
-
-
 
 
 socket.on('server', (msg) => {
@@ -73,16 +58,8 @@ socket.on('server', (msg) => {
 
     listitem.appendChild(dt);
     listitem.appendChild(dd);
-
-
-
     document.getElementById('msgbox').appendChild(listitem)
     
-
-
-
-
-
 })
 
 function send() {
