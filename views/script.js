@@ -22,7 +22,6 @@ fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
         dbutton.innerText=`delete`
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
-
             fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
                 alert('delete successfull')
             }).catch(err=>{alert(err)});
