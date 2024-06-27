@@ -14,7 +14,9 @@ else{
     alert('welcome '+user)
 }
 
-fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
+fetch(`http://localhost:9090/messages/667dd3c7319bc79b2ea51f57/667dd38eaefeab8644919291`)
+.then(r => { return r.json() })
+.then(r => {
     for (let x of r) {
         let dt = document.createElement('b')
         let dd = document.createElement('h6')
@@ -22,13 +24,15 @@ fetch(onlineurl+'/messages').then(r => { return r.json() }).then(r => {
         dbutton.innerText=`delete`
         let listitem = document.createElement('li');
         dbutton.addEventListener('click',()=>{
-            fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'}).then((res)=>{res.json()}).then((res)=>{
+            fetch(onlineurl+'/delete/'+x._id,{method:'Delete', 'Content-type': 'application/json; charset=UTF-8'})
+            .then((res)=>{res.json()})
+            .then((res)=>{
                 alert('delete successfull')
             }).catch(err=>{alert(err)});
                dbutton.parentElement.remove()
         })
-        dt.textContent ='from '+ x.sender + " at " + x.time
-        dd.textContent = x.message
+        dt.textContent ='from '+ x.sender.user_name + " at " + x.timestamp
+        dd.textContent = x.messageBody
 
         listitem.appendChild(dt);
         listitem.appendChild(dd);
@@ -62,6 +66,7 @@ socket.on('server', (msg) => {
 })
 
 function send() {
+    console.log('send function')
     let username=localStorage.getItem('user');
 
     if(username==null || username=="null" || username==''){
@@ -71,14 +76,14 @@ function send() {
     }else{
         let message = document.getElementById('messageinput').value;
         document.getElementById('messageinput').value=''
-        let time=new Date()
-        let currentdate=time.toLocaleDateString();
-        let currnettime=time.toLocaleTimeString();
-     
-        socket.emit('client', { name: username, message: message, time:currentdate+' '+currnettime})
+        socket.emit('private message', {body:message,senderId:"667dd3c7319bc79b2ea51f57"},'667dd38eaefeab8644919291')
     }
     
 }
+
+// // 667dd38eaefeab8644919291
+
+// 667dd3c7319bc79b2ea51f57
 
 function handle(e){
     if(e.keyCode === 13){
