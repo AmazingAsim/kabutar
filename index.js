@@ -8,10 +8,11 @@ let errorhander = require('./middleware/errorHandler');
 let db=require('./config/config');
 db.dbconnection();
 app.use(cors({
-   origin:'*',
-   methods:["GET",'DELETE']
+   origin:'http://localhost:3000',
+   methods:["GET","POST"],
+   credentials: true
 }));
-
+app.options('http://localhost:3000',cors())
 app.use(express.json());
 app.use(express.static("views"));
 app.use(express.urlencoded({extended:true}));
