@@ -11,7 +11,7 @@ let db=require('./config/config');
 const cookieParser = require('cookie-parser');
 db.dbconnection();
 app.use(cors({
-   origin:'https://webflix-omega.vercel.app/',
+   origin:'https://webflix-omega.vercel.app',
    methods:["GET","POST"],
    credentials: true
 }));
