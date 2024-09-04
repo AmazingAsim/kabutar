@@ -11,11 +11,11 @@ let db=require('./config/config');
 const cookieParser = require('cookie-parser');
 db.dbconnection();
 app.use(cors({
-   origin:'http://localhost:3000',
+   origin:'https://webflix-91k2nxvww-asim-sheikhs-projects-a6fcf598.vercel.app/',
    methods:["GET","POST"],
    credentials: true
 }));
-app.options('http://localhost:3000',cors())
+app.options('https://webflix-91k2nxvww-asim-sheikhs-projects-a6fcf598.vercel.app/',cors())
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.static("views"));
