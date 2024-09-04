@@ -25,7 +25,6 @@ let signUp =async(req,res)=>{
 let login = async(req,res)=>{
     
         let user = req.body;
-        console.time('login')
         let result = await userRepo.login(user);
         if(result === 'invalid email' || result ==='invalid password'){
             res.send({message:'invalid password or email',res:result,validLogin:false})
