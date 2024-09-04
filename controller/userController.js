@@ -27,14 +27,20 @@ let login = async(req,res)=>{
         let user = req.body;
         console.time('login')
         let result = await userRepo.login(user);
-        console.timeEnd('login')
         if(result === 'invalid email' || result ==='invalid password'){
             res.send({message:'invalid password or email',res:result,validLogin:false})
         }
+        else{
+            res.cookie('jwt',result.jwt,{ 
+                expires: new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000), 
+                httpOnly: true,
+                secure:false
+              });
+            res.status(201).send({message:"Login successfull",validLogin:true,email:user.user_email,jwt:result.jwt,id:result.id})
+        }
 
-        res.cookie('jwt',result.jwt,{httpOnly:true,secure:false});
-        res.status(201).send({message:"Login successfull",validLogin:true,email:user.user_email,jwt:result.jwt,id:result.id})
-}
+    }
+
 
 let currentUser = async(req,res)=>{
     console.time('currentuser')
@@ -72,4 +78,16 @@ let getImage = async(req,res)=>{
     res.sendFile(path.join(__dirname,'..','profiles',req.params.profileImage))
 }
 
-module.exports = {addProfile,getImage,login,signUp,getusers,currentUser}
+let deleteCookie = (req, res) => {
+    res.cookie('jwt', '', { 
+      expires: new Date(0), 
+      httpOnly: true,
+      secure: false
+    });
+    res.send('Cookie deleted');
+  }
+
+
+  
+
+module.exports = {addProfile,getImage,login,signUp,getusers,currentUser,deleteCookie}
