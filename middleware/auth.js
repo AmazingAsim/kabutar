@@ -1,8 +1,8 @@
 let jwt = require('jsonwebtoken');
 
 const checkJwtToken = async (req,res,next)=>{
-    let jwttoken = req.cookies?.jwt;
-    console.log(req.cookies?.jwt)
+    let jwttoken = req.headers['authorization'].split(' ')[1];
+    console.log(jwttoken);
     if(!jwttoken){
         res.send('unauth attempt');
     }

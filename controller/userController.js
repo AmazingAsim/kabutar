@@ -4,7 +4,7 @@ let fs = require('fs')
 let getusers = async(req,res)=>{
     try {
         let result = await userRepo.showUser();
-        res.send(result);
+        res.status(200).send(result);
     } catch (err) {
         console.log(err)
     }
@@ -12,7 +12,6 @@ let getusers = async(req,res)=>{
 
 let signUp =async(req,res)=>{
     try { 
-
         let user = req.body;
         let result = await userRepo.signUp(user);
         res.status(201).send({message:"account is created",res:result});
@@ -30,24 +29,22 @@ let login = async(req,res)=>{
             res.send({message:'invalid password or email',res:result,validLogin:false})
         }
         else{
-            res.cookie('jwt',result.jwt,{ 
-                expires: new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000), 
-                httpOnly: true,
-                secure:false
-              });
-            res.status(201).send({message:"Login successfull",validLogin:true,email:user.user_email,jwt:result.jwt,id:result.id})
+            res.status(201).send({message:"Login successfull",
+                validLogin:true,
+                email:user.user_email,
+                jwt:result.jwt,
+                id:result.id
+            })
         }
 
     }
 
 
 let currentUser = async(req,res)=>{
-    console.time('currentuser')
     try {
     let id = req.params.id;
 
     let result = await userRepo.currentUser(id);
-    console.timeEnd('currentuser')
     if(result != null){
         res.send(result)
     }
@@ -77,16 +74,9 @@ let getImage = async(req,res)=>{
     res.sendFile(path.join(__dirname,'..','profiles',req.params.profileImage))
 }
 
-let deleteCookie = (req, res) => {
-    res.cookie('jwt', '', { 
-      expires: new Date(0), 
-      httpOnly: true,
-      secure: false
-    });
-    res.send('Cookie deleted');
-  }
+
 
 
   
 
-module.exports = {addProfile,getImage,login,signUp,getusers,currentUser,deleteCookie}
+module.exports = {addProfile,getImage,login,signUp,getusers,currentUser}

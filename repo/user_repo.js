@@ -18,7 +18,7 @@ return newuser.save()
 }
 
 let showUser = ()=>{
-    return userModel.find()
+    return userModel.find();
 }
 
 let login = async(user)=>{
@@ -38,6 +38,11 @@ let login = async(user)=>{
     console.log(token)
     return {jwt:token,id:result._id};
 }
+
+
+
+
+
 
 let currentUser = async (id)=>{
     
