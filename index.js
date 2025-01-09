@@ -11,6 +11,7 @@ let path = require('path');
 let db=require('./config/config');
 db.dbconnection();
 let frontendUrl = (process.env.FRONTEND_URL || 'http://localhost:3000');
+console.log(frontendUrl);
 app.use(cors({
   origin: frontendUrl,
   methods:["GET","POST"],
