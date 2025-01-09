@@ -18,7 +18,7 @@ app.use(cors({
 }));
 
 // app.options('https://webflix-omega.vercel.app',cors())
-app.options('http://localhost:3000',cors())
+app.options(frontendUrl,cors())
 
 
 
