@@ -7,20 +7,12 @@ let Message=require('./model/messagemodel');
 let userRouter = require('./router/user_routes')
 let cors=require('cors');
 let errorhander = require('./middleware/errorHandler');
+let path = require('path');
 let db=require('./config/config');
 db.dbconnection();
-
-
-
-
-// app.use(cors({
-//    origin:'https://webflix-omega.vercel.app',
-//    methods:["GET","POST"],
-//    credentials: true
-// }));
-
+let frontendUrl = (process.env.FRONTEND_URL || 'http://localhost:3000');
 app.use(cors({
-  origin:'http://localhost:3000',
+  origin: frontendUrl,
   methods:["GET","POST"],
   credentials: true
 }));
@@ -33,11 +25,17 @@ app.options('http://localhost:3000',cors())
 
 
 app.use(express.json());
-app.use(express.static("views"));
 app.use(express.urlencoded({extended:true}));
+// app.use(express.static("frontend/build"));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'frontend', 'build', 'index.html'));
+// });
 
 let port=( process.env.PORT || 9090)
 let httpserver=require('http').createServer(app)
+
+
 let io=require('socket.io')(httpserver,{
    cors: {
      origin: "*",
@@ -58,6 +56,7 @@ io.on('connection',(socket)=>{
    });
 
    socket.on('pm', async(msg, to) => {
+       console.log(msg.body);
        const messagebox={
          messageBody:msg.body,
          sender:msg.senderId,
@@ -73,6 +72,10 @@ io.on('connection',(socket)=>{
        socket.join(userId);
    });
 })
+
+
+
+
    
 app.use(errorhander)
 httpserver.listen(port)

@@ -22,6 +22,7 @@ let showUser = ()=>{
 }
 
 let login = async(user)=>{
+  try {
     let result = await userModel.findOne({user_email:user.user_email});
     if(result==null){
         return 'invalid email'
@@ -37,6 +38,9 @@ let login = async(user)=>{
     let token = await jwt.sign(payload,'watcher');
     console.log(token)
     return {jwt:token,id:result._id};
+  } catch (error) {
+     console.log(error)
+  }
 }
 
 

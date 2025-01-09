@@ -4,6 +4,7 @@ let fs = require('fs')
 let getusers = async(req,res)=>{
     try {
         let result = await userRepo.showUser();
+        console.log(result)
         res.status(200).send(result);
     } catch (err) {
         console.log(err)
