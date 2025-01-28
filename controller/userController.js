@@ -1,6 +1,8 @@
 let userRepo = require('../repo/user_repo');
 let path = require('path');
-let fs = require('fs')
+let fs = require('fs');
+
+
 let getusers = async(req,res)=>{
     try {
         let result = await userRepo.showUser();

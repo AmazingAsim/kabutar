@@ -12,7 +12,7 @@ let newuser = new userModel({
     user_name:user.user_name,
     user_email:user.user_email,
     user_password:hashpass
-})
+});
 
 return newuser.save()
 }

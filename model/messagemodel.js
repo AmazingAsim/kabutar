@@ -14,7 +14,7 @@ let messageSchema=mongoose.Schema({
         ref: 'users',
         required: true
       },
-      receiver: {
+    receiver: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
         required: true

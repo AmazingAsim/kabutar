@@ -12,7 +12,7 @@ const checkJwtToken = async (req,res,next)=>{
             res.send('unauthorized attempt')
         }
         else{
-            next()
+            next()  
         }
     }
 }
