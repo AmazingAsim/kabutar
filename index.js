@@ -73,13 +73,10 @@ io.on('connection',(socket)=>{
        socket.join(userId);
    });
 })
-
-
-
-
-   
 app.use(errorhander)
 httpserver.listen(port)
+
+module.exports = app;
 
 
 
