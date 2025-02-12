@@ -27,11 +27,8 @@ app.options(frontendUrl,cors())
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-// app.use(express.static("frontend/build"));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname,'frontend', 'build', 'index.html'));
-// });
+
 
 let port=( process.env.PORT || 9090)
 let httpserver=require('http').createServer(app)
@@ -43,11 +40,15 @@ let io=require('socket.io')(httpserver,{
      methods: ["GET", "POST","DELETE"]
    }
  })
+
 app.use('/users',userRouter);
 app.use('/',router)
 
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'frontend', 'build', 'index.html'));
+});
 
 io.on('connection',(socket)=>{
    console.log('A user connected');
