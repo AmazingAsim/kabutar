@@ -58,14 +58,18 @@ let currentUser = async(req,res)=>{
 }
 
 let addProfile = async(req,res)=>{
-    let user = await userRepo.currentUser(req.body._id);
-    if(user.user_profile){
-        fs.unlinkSync(path.join(__dirname,'..','profiles',user.user_profile))
-    }
-   
     if(!req.file){
         res.send({message:"no file is selected",flag:false});
     }
+    let user = await userRepo.currentUser(req.body._id);
+    if(user.user_profile){
+        const profilePath = path.join(__dirname,'..','profiles',user.user_profile);
+        if(fs.existsSync(profilePath)){
+            fs.unlinkSync(profilePath);
+        }
+    }
+   
+    
     else{
         let fileName = req.file.originalname
         let result = await userRepo.addProfile(req.body._id,fileName);
