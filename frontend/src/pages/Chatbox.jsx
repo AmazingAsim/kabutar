@@ -41,7 +41,7 @@ let sendMessage = async()=>{
     ,[sender,receiver])
 
   useEffect(()=>{
-    let socket = io('http://localhost:9090');
+    let socket = io();
     socketRef.current = socket;
     socket.emit('register',sender);
   
@@ -96,9 +96,7 @@ useEffect(()=>{
           }
 
           {/* Invisible div to ensure scrolling */}
-        <div ref={messagesEndRef} />
-
-            </div>
+        <div ref={messagesEndRef} /></div>
             <div className='inputBox'>
               <textarea onChange={(e)=>{setMessageBody(e.target.value)}} value={messageBody} className='form-control' type="text" />
               <button onClick={sendMessage} className='btn btn-success'>Send</button>
